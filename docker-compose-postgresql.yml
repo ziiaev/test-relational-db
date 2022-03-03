@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+ datastore:
+  container_name: dev_postgre # use this container name as a host/address in pgAdmin
+  image: postgres:latest
+  ports:
+   - 5432:5432
+  environment:
+   POSTRGRES_PASSWORD: 1qaz@WSX
+   POSTGRES_USER: admin
+   POSTGRES_DB: db_for_experiments
+   POSTGRES_HOST_AUTH_METHOD: trust
+  volumes:
+   - db_volume:/var/lib/postgresql/data
+ 
+ pgadmin4:
+  container_name: dev_pgadmin4
+  image: dpage/pgadmin4:latest
+  ports:
+   - 5433:80
+  environment:
+   PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+   PGADMIN_DEFAULT_PASSWORD: 1qaz@WSX
+  volumes:
+   - pgadmin_volume:/var/lib/pgadmin
+
+volumes:
+ db_volume: {}
+ pgadmin_volume: {}
