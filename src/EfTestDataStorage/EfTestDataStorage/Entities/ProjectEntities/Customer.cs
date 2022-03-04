@@ -6,8 +6,8 @@
 
         public string Description { get; set; }
 
-        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public virtual ICollection<ProjectSet> ProjectSets { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

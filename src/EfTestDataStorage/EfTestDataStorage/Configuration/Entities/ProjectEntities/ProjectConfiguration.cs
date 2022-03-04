@@ -10,9 +10,12 @@ namespace EfTestDataStorage.Configuration.Entities.ProjectEntities
         {
             builder.HasKey(d => d.Id);
 
-            builder.HasOne(d => d.ProjectSet)
-                .WithMany(e => e.Projects)
-                .HasForeignKey(d => d.ProjectSetId);
+            builder.HasOne(p => p.Customer)
+                .WithMany(c => c.Projects)
+                .HasForeignKey(p => p.CustomerId);
+
+            builder.Property(p => p.ProjectHealth).HasConversion<string>();
+            builder.Property(p => p.ProjectStatus).HasConversion<string>();
         }
     }
 }

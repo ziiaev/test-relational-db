@@ -42,8 +42,6 @@ namespace EfTestDataStorage.EfDbContext
 
         public DbSet<ProjectRoleType> ProjectRoleTypes { get; set; }
 
-        public DbSet<ProjectSet> ProjectSets { get; set; }
-
         #endregion
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
