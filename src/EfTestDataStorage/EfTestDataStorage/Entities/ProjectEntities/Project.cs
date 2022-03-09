@@ -12,10 +12,6 @@ namespace EfTestDataStorage.Entities.ProjectEntities
 
         public DateOnly? EndDate { get; set; }
 
-        public string Tools { get; set; }
-
-        public string Technologies { get; set; }
-
         public ProjectHealth ProjectHealth { get; set; }
 
         public ProjectStatus ProjectStatus { get; set; }

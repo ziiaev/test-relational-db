@@ -2,7 +2,7 @@
 
 namespace EfTestDataStorage.Entities.ProjectEntities
 {
-    public class ProjectEmployee : BaseEntity
+    public class ProjectEmployee
     {
         public Guid ProjectId { get; set; }
 

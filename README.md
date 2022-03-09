@@ -17,6 +17,10 @@ This is not executable application. You need to perform next steps to configure 
    Username: admin
    Password: 1qaz@WSX
 9. See that tables are created sucessfully
+10. Copy 'db_dump.sql' file to postgresql docker container using 'docker cp .\db_dump.sql container_id:/db_dump.sql'
+    'docker ps' command will list all existing containers
+11. Connect to postgresql container using 'docker exec -it dev_postgre bash' command
+11. Restore database using 'psql --username=admin --dbname=db_for_experiments < db_dump.sql' command
 
 
 Schema description:
@@ -37,8 +41,7 @@ Schema description:
 'EmployeeDocuments' table has many-to-one relationship with 'DocumentTypes' table.
 'EmployeeDocuments' table has many-to-one relationship with 'Employees' table.
 
-'Customers' table has one-to-many relationship with 'ProjectSets' table.
-'ProjectSets' table has one-to-many relationship with 'Projects' table.
+'Customers' table has one-to-many relationship with 'Projects' table.
 
 'Projects' table has many-to-many relationship with 'Employees' table.
 

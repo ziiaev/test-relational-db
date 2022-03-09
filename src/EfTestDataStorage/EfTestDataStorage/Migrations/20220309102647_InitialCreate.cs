@@ -16,7 +16,7 @@ namespace EfTestDataStorage.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    email = table.Column<string>(type: "text", nullable: false)
+                    phone_number = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,19 +75,35 @@ namespace EfTestDataStorage.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "project_sets",
+                name: "technologies",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_technologies", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "projects",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
+                    start_date = table.Column<DateOnly>(type: "date", nullable: false),
+                    end_date = table.Column<DateOnly>(type: "date", nullable: true),
+                    project_health = table.Column<string>(type: "text", nullable: false),
+                    project_status = table.Column<string>(type: "text", nullable: false),
                     customer_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_project_sets", x => x.id);
+                    table.PrimaryKey("pk_projects", x => x.id);
                     table.ForeignKey(
-                        name: "fk_project_sets_customers_customer_id",
+                        name: "fk_projects_customers_customer_id",
                         column: x => x.customer_id,
                         principalTable: "customers",
                         principalColumn: "id",
@@ -116,25 +132,25 @@ namespace EfTestDataStorage.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "projects",
+                name: "project_technologies",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    start_date = table.Column<DateOnly>(type: "date", nullable: false),
-                    end_date = table.Column<DateOnly>(type: "date", nullable: true),
-                    tools = table.Column<string>(type: "text", nullable: false),
-                    technologies = table.Column<string>(type: "text", nullable: false),
-                    project_set_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    technology_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_projects", x => x.id);
+                    table.PrimaryKey("pk_project_technologies", x => new { x.project_id, x.technology_id });
                     table.ForeignKey(
-                        name: "fk_projects_project_sets_project_set_id",
-                        column: x => x.project_set_id,
-                        principalTable: "project_sets",
+                        name: "fk_project_technologies_projects_project_id",
+                        column: x => x.project_id,
+                        principalTable: "projects",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_project_technologies_technologies_technology_id",
+                        column: x => x.technology_id,
+                        principalTable: "technologies",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -171,8 +187,6 @@ namespace EfTestDataStorage.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     employee_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    first_name = table.Column<string>(type: "text", nullable: false),
-                    last_name = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
                     phone_number = table.Column<string>(type: "text", nullable: false),
                     birth_date = table.Column<DateOnly>(type: "date", nullable: false),
@@ -214,38 +228,11 @@ namespace EfTestDataStorage.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "units",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    parent_unit_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    unit_head_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_units", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_units_employees_unit_head_id",
-                        column: x => x.unit_head_id,
-                        principalTable: "employees",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_units_units_parent_unit_id",
-                        column: x => x.parent_unit_id,
-                        principalTable: "units",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "project_employees",
                 columns: table => new
                 {
                     project_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    employee_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    id = table.Column<Guid>(type: "uuid", nullable: false)
+                    employee_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -293,6 +280,32 @@ namespace EfTestDataStorage.Migrations
                         principalTable: "projects",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "units",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    parent_unit_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    unit_head_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_units", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_units_employees_unit_head_id",
+                        column: x => x.unit_head_id,
+                        principalTable: "employees",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_units_units_parent_unit_id",
+                        column: x => x.parent_unit_id,
+                        principalTable: "units",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -366,14 +379,14 @@ namespace EfTestDataStorage.Migrations
                 column: "project_role_type_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_project_sets_customer_id",
-                table: "project_sets",
-                column: "customer_id");
+                name: "ix_project_technologies_technology_id",
+                table: "project_technologies",
+                column: "technology_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_projects_project_set_id",
+                name: "ix_projects_customer_id",
                 table: "projects",
-                column: "project_set_id");
+                column: "customer_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_units_parent_unit_id",
@@ -407,6 +420,9 @@ namespace EfTestDataStorage.Migrations
                 name: "project_roles");
 
             migrationBuilder.DropTable(
+                name: "project_technologies");
+
+            migrationBuilder.DropTable(
                 name: "document_types");
 
             migrationBuilder.DropTable(
@@ -422,16 +438,16 @@ namespace EfTestDataStorage.Migrations
                 name: "projects");
 
             migrationBuilder.DropTable(
+                name: "technologies");
+
+            migrationBuilder.DropTable(
                 name: "employees");
 
             migrationBuilder.DropTable(
-                name: "project_sets");
+                name: "customers");
 
             migrationBuilder.DropTable(
                 name: "positions");
-
-            migrationBuilder.DropTable(
-                name: "customers");
         }
     }
 }

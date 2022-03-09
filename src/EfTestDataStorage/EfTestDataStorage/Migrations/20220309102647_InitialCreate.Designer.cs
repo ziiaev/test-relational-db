@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EfTestDataStorage.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220304163941_SchemaUpdate")]
-    partial class SchemaUpdate
+    [Migration("20220309102647_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,16 +131,6 @@ namespace EfTestDataStorage.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid")
                         .HasColumnName("employee_id");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("first_name");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("last_name");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -345,16 +335,6 @@ namespace EfTestDataStorage.Migrations
                         .HasColumnType("date")
                         .HasColumnName("start_date");
 
-                    b.Property<string>("Technologies")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("technologies");
-
-                    b.Property<string>("Tools")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("tools");
-
                     b.HasKey("Id")
                         .HasName("pk_projects");
 
@@ -373,10 +353,6 @@ namespace EfTestDataStorage.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid")
                         .HasColumnName("employee_id");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
 
                     b.HasKey("ProjectId", "EmployeeId")
                         .HasName("pk_project_employees");
@@ -447,12 +423,12 @@ namespace EfTestDataStorage.Migrations
                         .HasColumnName("technology_id");
 
                     b.HasKey("ProjectId", "TechnologyId")
-                        .HasName("pk_project_technology");
+                        .HasName("pk_project_technologies");
 
                     b.HasIndex("TechnologyId")
-                        .HasDatabaseName("ix_project_technology_technology_id");
+                        .HasDatabaseName("ix_project_technologies_technology_id");
 
-                    b.ToTable("project_technology");
+                    b.ToTable("project_technologies");
                 });
 
             modelBuilder.Entity("EfTestDataStorage.Entities.ProjectEntities.Technology", b =>
@@ -468,9 +444,9 @@ namespace EfTestDataStorage.Migrations
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("pk_technology");
+                        .HasName("pk_technologies");
 
-                    b.ToTable("technology");
+                    b.ToTable("technologies");
                 });
 
             modelBuilder.Entity("EfTestDataStorage.Entities.DocumentEntities.EmployeeDocument", b =>
@@ -649,14 +625,14 @@ namespace EfTestDataStorage.Migrations
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_project_technology_projects_project_id");
+                        .HasConstraintName("fk_project_technologies_projects_project_id");
 
                     b.HasOne("EfTestDataStorage.Entities.ProjectEntities.Technology", "Technology")
                         .WithMany("ProjectTechnologies")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_project_technology_technology_technology_id");
+                        .HasConstraintName("fk_project_technologies_technologies_technology_id");
 
                     b.Navigation("Project");
 
