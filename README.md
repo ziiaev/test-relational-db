@@ -3,17 +3,17 @@ This is test class library to generate database using EF Core code first approac
 This is not executable application. You need to perform next steps to configure the database.
 
 1. Install Docker
-2. Run <docker compose -f .\docker-compose-postgresql.yml up> command
+2. Run 'docker compose -f .\docker-compose-postgresql.yml up' command
 3. Wait until containers are running
 4. Install entity framework core tools using <dotnet tool install --global dotnet-ef> command
-5. Run <dotnet ef database update --project .\src\EfTestDataStorage\EfTestDataStorage\EfTestDataStorage.csproj> command
+5. Run 'dotnet ef database update --project .\src\EfTestDataStorage\EfTestDataStorage\EfTestDataStorage.csproj' command
 6. Go to http://localhost:5433/
 7. Enter using next credentials:
    email: admin@gmail.com
    password: 1qaz@WSX
 8. Create server
-   Name: <any name>
-   Host name/address: To determine address of postgres run <docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dev_postgre> command
+   Name: 'any name'
+   Host name/address: To determine address of postgres run "docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dev_postgre" command
    Username: admin
    Password: 1qaz@WSX
 9. See that tables are created sucessfully
