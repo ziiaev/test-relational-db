@@ -5,7 +5,7 @@
 -- Dumped from database version 14.2 (Debian 14.2-1.pgdg110+1)
 -- Dumped by pg_dump version 14.1
 
--- Started on 2022-03-09 12:07:15 UTC
+-- Started on 2022-03-09 18:47:57 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -131,6 +131,14 @@ COPY public.roles (id, name, description) FROM stdin;
 COPY public.employee_roles (employee_id, role_id) FROM stdin;
 2bcc2ca0-0ee4-4dd1-84f9-8cbb11a63499	43ae4e54-3736-4ba2-875e-94c0535ad6ae
 4261c9d3-ef3a-4138-8a0d-89a96509256c	43ae4e54-3736-4ba2-875e-94c0535ad6ae
+2bcc2ca0-0ee4-4dd1-84f9-8cbb11a63499	3c491773-3cb9-4354-ae5c-95301a876b61
+ec602f56-1e97-43d9-b3c0-6be0eae86caf	3c491773-3cb9-4354-ae5c-95301a876b61
+cfb8af2e-7960-4e6c-a7f6-746b6cb16bce	3c491773-3cb9-4354-ae5c-95301a876b61
+59a154d5-adeb-4c96-a562-96dc51cb4f08	3c491773-3cb9-4354-ae5c-95301a876b61
+5a52c925-01a9-407e-b7f4-71847fed885e	3c491773-3cb9-4354-ae5c-95301a876b61
+67559664-1567-4373-946e-fda9810d63fe	3c491773-3cb9-4354-ae5c-95301a876b61
+83309bbb-abbb-474b-a33b-74cc2ae4783e	3c491773-3cb9-4354-ae5c-95301a876b61
+5d8607c6-8973-4aa1-9082-1ecf7ed7c6ba	3c491773-3cb9-4354-ae5c-95301a876b61
 \.
 
 
@@ -250,7 +258,7 @@ COPY public.project_technologies (project_id, technology_id) FROM stdin;
 \.
 
 
--- Completed on 2022-03-09 12:07:15 UTC
+-- Completed on 2022-03-09 18:47:57 UTC
 
 --
 -- PostgreSQL database dump complete
