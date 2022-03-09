@@ -228,30 +228,6 @@ namespace EfTestDataStorage.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "project_employees",
-                columns: table => new
-                {
-                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    employee_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_project_employees", x => new { x.project_id, x.employee_id });
-                    table.ForeignKey(
-                        name: "fk_project_employees_employees_employee_id",
-                        column: x => x.employee_id,
-                        principalTable: "employees",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_project_employees_projects_project_id",
-                        column: x => x.project_id,
-                        principalTable: "projects",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "project_roles",
                 columns: table => new
                 {
@@ -364,11 +340,6 @@ namespace EfTestDataStorage.Migrations
                 column: "position_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_project_employees_employee_id",
-                table: "project_employees",
-                column: "employee_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_project_roles_employee_id",
                 table: "project_roles",
                 column: "employee_id");
@@ -412,9 +383,6 @@ namespace EfTestDataStorage.Migrations
 
             migrationBuilder.DropTable(
                 name: "employee_units");
-
-            migrationBuilder.DropTable(
-                name: "project_employees");
 
             migrationBuilder.DropTable(
                 name: "project_roles");

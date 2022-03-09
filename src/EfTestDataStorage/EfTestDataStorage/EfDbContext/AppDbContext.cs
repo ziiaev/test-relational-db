@@ -36,8 +36,6 @@ namespace EfTestDataStorage.EfDbContext
 
         public DbSet<Project> Projects { get; set; }
 
-        public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
-
         public DbSet<ProjectRole> ProjectRoles { get; set; }
 
         public DbSet<ProjectRoleType> ProjectRoleTypes { get; set; }

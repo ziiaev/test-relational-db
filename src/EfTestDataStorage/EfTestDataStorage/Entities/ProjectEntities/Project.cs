@@ -22,8 +22,6 @@ namespace EfTestDataStorage.Entities.ProjectEntities
 
         public virtual Customer Customer { get; set; }
 
-        public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
-
         public virtual ICollection<ProjectRole> ProjectRoles { get; set; }
 
         public virtual ICollection<ProjectTechnology> ProjectTechnologies { get; set; }

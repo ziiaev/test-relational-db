@@ -25,8 +25,6 @@ namespace EfTestDataStorage.Entities.IdentityEntities
 
         public virtual ICollection<EmployeeRole> Roles { get; set; }
 
-        public virtual ICollection<ProjectEmployee> EmployeeProjects { get; set; }
-
         public virtual ICollection<ProjectRole> ProjectRoles { get; set; }
 
         public virtual ICollection<Unit> SubordinateUnits { get; set; }

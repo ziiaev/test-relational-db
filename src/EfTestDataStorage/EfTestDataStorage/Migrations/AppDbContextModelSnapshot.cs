@@ -342,25 +342,6 @@ namespace EfTestDataStorage.Migrations
                     b.ToTable("projects");
                 });
 
-            modelBuilder.Entity("EfTestDataStorage.Entities.ProjectEntities.ProjectEmployee", b =>
-                {
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("project_id");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("employee_id");
-
-                    b.HasKey("ProjectId", "EmployeeId")
-                        .HasName("pk_project_employees");
-
-                    b.HasIndex("EmployeeId")
-                        .HasDatabaseName("ix_project_employees_employee_id");
-
-                    b.ToTable("project_employees");
-                });
-
             modelBuilder.Entity("EfTestDataStorage.Entities.ProjectEntities.ProjectRole", b =>
                 {
                     b.Property<Guid>("ProjectId")
@@ -565,27 +546,6 @@ namespace EfTestDataStorage.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("EfTestDataStorage.Entities.ProjectEntities.ProjectEmployee", b =>
-                {
-                    b.HasOne("EfTestDataStorage.Entities.IdentityEntities.Employee", "Employee")
-                        .WithMany("EmployeeProjects")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_project_employees_employees_employee_id");
-
-                    b.HasOne("EfTestDataStorage.Entities.ProjectEntities.Project", "Project")
-                        .WithMany("ProjectEmployees")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_project_employees_projects_project_id");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Project");
-                });
-
             modelBuilder.Entity("EfTestDataStorage.Entities.ProjectEntities.ProjectRole", b =>
                 {
                     b.HasOne("EfTestDataStorage.Entities.IdentityEntities.Employee", "Employee")
@@ -646,8 +606,6 @@ namespace EfTestDataStorage.Migrations
                 {
                     b.Navigation("Documents");
 
-                    b.Navigation("EmployeeProjects");
-
                     b.Navigation("PersonalInfo")
                         .IsRequired();
 
@@ -684,8 +642,6 @@ namespace EfTestDataStorage.Migrations
 
             modelBuilder.Entity("EfTestDataStorage.Entities.ProjectEntities.Project", b =>
                 {
-                    b.Navigation("ProjectEmployees");
-
                     b.Navigation("ProjectRoles");
 
                     b.Navigation("ProjectTechnologies");
