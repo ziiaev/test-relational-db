@@ -8,16 +8,16 @@ This is not executable application. You need to perform next steps to configure 
 4. Install entity framework core tools using <dotnet tool install --global dotnet-ef> command
 5. Run 'dotnet ef database update --project .\src\EfTestDataStorage\EfTestDataStorage\EfTestDataStorage.csproj' command
 6. Go to http://localhost:5433/
-7. Enter using next credentials:
-   email: admin@gmail.com
+7. Enter using next credentials: <br />
+   email: admin@gmail.com <br />
    password: 1qaz@WSX
-8. Create server
-   Name: 'any name'
-   Host name/address: To determine address of postgres run "docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dev_postgre" command
-   Username: admin
+8. Create server <br />
+   Name: 'any name' <br />
+   Host name/address: To determine address of postgres run "docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dev_postgre" command <br />
+   Username: admin <br />
    Password: 1qaz@WSX
 9. See that tables are created sucessfully
-10. Copy 'db_dump_data_only.sql' file to postgresql docker container using 'docker cp .\db_dump_data_only.sql container_id:/db_dump_data_only.sql'
+10. Copy 'db_dump_data_only.sql' file to postgresql docker container using 'docker cp .\db_dump_data_only.sql container_id:/db_dump_data_only.sql' <br />
     'docker ps' command will list all existing containers
 11. Connect to postgresql container using 'docker exec -it dev_postgre bash' command
 11. Restore database using 'psql --username=admin --dbname=db_for_experiments < db_dump_data_only.sql' command
