@@ -1,7 +1,9 @@
 ﻿namespace EfTestDataStorage.Entities.IdentityEntities
 {
-    public class Unit : BaseEntity
+    public class Unit
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }

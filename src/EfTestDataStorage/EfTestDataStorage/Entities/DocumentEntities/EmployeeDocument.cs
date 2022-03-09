@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EfTestDataStorage.Entities.DocumentEntities
 {
-    public class EmployeeDocument : BaseEntity
+    public class EmployeeDocument
     {
+        public Guid Id { get; set; }
+
         public Guid DocumentTypeId { get; set; }
 
         public virtual DocumentType DocumentType { get; set; }

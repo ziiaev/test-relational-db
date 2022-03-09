@@ -1,7 +1,9 @@
 ﻿namespace EfTestDataStorage.Entities.DocumentEntities
 {
-    public class DocumentType : BaseEntity
+    public class DocumentType
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
 
         public string? Description { get; set; }

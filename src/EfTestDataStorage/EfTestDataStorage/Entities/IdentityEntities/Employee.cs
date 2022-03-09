@@ -3,8 +3,10 @@ using EfTestDataStorage.Entities.ProjectEntities;
 
 namespace EfTestDataStorage.Entities.IdentityEntities
 {
-    public class Employee : BaseEntity
+    public class Employee
     {
+        public Guid Id { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

@@ -2,8 +2,10 @@
 
 namespace EfTestDataStorage.Entities.IdentityEntities
 {
-    public class EmployeePersonalInfo : BaseEntity
+    public class EmployeePersonalInfo
     {
+        public Guid Id { get; set; }
+
         public Guid EmployeeId { get; set; }
 
         public virtual Employee Employee { get; set; }

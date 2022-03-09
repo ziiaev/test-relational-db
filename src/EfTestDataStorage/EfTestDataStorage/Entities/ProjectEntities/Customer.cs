@@ -1,7 +1,9 @@
 ﻿namespace EfTestDataStorage.Entities.ProjectEntities
 {
-    public class Customer : BaseEntity
+    public class Customer
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
